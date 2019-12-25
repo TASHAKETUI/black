@@ -99,7 +99,7 @@ echo -e "\e[36m"
 done
 ]])  
 file:close()  
-file = io.open("Bk", "w")  
+file = io.open("bk", "w")  
 file:write([[
 #!/usr/bin/env bash
 cd $HOME/black
@@ -1701,19 +1701,17 @@ end
 end
 ------------------------------------------------------------------------
 if msg.content_.ID == "MessageChatJoinByLink" then
-if database:get("lock_kansers:bot_id"..msg.chat_id_..bot_id) then
+if database:get("lock_kansers:black"..msg.chat_id_..bot_id) then
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 local last_ = data.last_name_ or ''
 local first_ = data.first_name_ or ''
 taha = (first_..''..last_)
-Num = (database:get(bot_id..'Num:kansers'..msg.chat_id_) or 25)
+Num = (database:get('black:'..bot_id..'Num:kansers'..msg.chat_id_) or 25)
 if string.len(taha) > tonumber(Num) then
-send(msg.chat_id_, msg.id_, 1,'📛┇ عذرا غير مرحب بك هنا',1')
+send(msg.chat_id_, msg.id_, 1, '📛┇ عذرا غير مرحب بك هنا',1, 'md')
 chat_kick(msg.chat_id_, msg.sender_user_id_)
 end
 end,nil)   
-return false
-end
 function get_welcome(extra,result,success)
 if database:get('black:'..bot_id..'welcome:'..msg.chat_id_) then
 text = database:get('black:'..bot_id..'welcome:'..msg.chat_id_)
