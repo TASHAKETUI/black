@@ -43,7 +43,7 @@ end
 else
 print('\27[1;31m==========================\n لم يتم حفظ التوكن ارسل لي التوكن الان')
 end 
-os.execute('lua Black.lua')
+os.execute('lua black.lua')
 end
 if not database:get(id_server..":SUDO:ID") then
 io.write('\27[1;35m\n ارسل لي ايدي المطور الاساسي ↓ :\n\27[0;33;49m')
@@ -54,7 +54,7 @@ database:set(id_server..":SUDO:ID",SUDOID)
 else
 print('\27[1;31m==========================\n لم يتم حفظ ايدي المطور الاساسي ارسله مره اخره')
 end 
-os.execute('lua Black.lua')
+os.execute('lua black.lua')
 end
 local create_config_auto = function()
 config = {
@@ -64,10 +64,10 @@ SUDO = database:get(id_server..":SUDO:ID"),
 create(config, "./Info.lua")   
 end 
 create_config_auto()
-file = io.open("Black", "w")  
+file = io.open("black", "w")  
 file:write([[
 #!/usr/bin/env bash
-cd $HOME/Black
+cd $HOME/black
 token="]]..database:get(id_server..":token")..[["
 while(true) do
 rm -fr ../.telegram-cli
@@ -95,18 +95,18 @@ echo -e "\033[38;5;208m"
 echo -e "                                                  "
 echo -e "\033[0;00m"
 echo -e "\e[36m"
-./tg -s ./Black.lua -p PROFILE --bot=$token
+./tg -s ./black.lua -p PROFILE --bot=$token
 done
 ]])  
 file:close()  
 file = io.open("Bk", "w")  
 file:write([[
 #!/usr/bin/env bash
-cd $HOME/Black
+cd $HOME/black
 while(true) do
 rm -fr ../.telegram-cli
-screen -S Black -X kill
-screen -S Black ./Black
+screen -S black -X kill
+screen -S black ./black
 done
 ]])  
 file:close() 
