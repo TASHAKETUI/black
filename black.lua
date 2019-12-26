@@ -1,12 +1,3 @@
---[[
- _____ ____  _   _    _    _  _______
-|_   _/ ___|| | | |  / \  | |/ / ____|
-  | | \___ \| |_| | / _ \ | ' /|  _|
-  | |  ___) |  _  |/ ___ \| . \| |___
-  |_| |____/|_| |_/_/   \_\_|\_\_____|
-           CH > @blackTEAM
---]]
---------------------------------------
 redis = require('redis') 
 https = require ("ssl.https") 
 serpent = dofile("./serpent.lua") 
@@ -884,65 +875,6 @@ end
 function Add_local(Chat)
 database:set("lock_tag:black"..Chat..bot_id,"ok");database:set("lock_sarha:black"..Chat..bot_id,"ok");database:set("lock_word:black"..Chat..bot_id,"ok");database:set("lock_edit:black"..Chat..bot_id,"ok");database:set("lock_lllll:black"..Chat..bot_id,"ok");database:set("lock_gif:black"..Chat..bot_id,"ok");database:set("lock_files:black"..Chat..bot_id,"ok");database:set("lock_mark:black"..Chat..bot_id,"ok");database:set("lock_photo:black"..Chat..bot_id,"ok");database:set("lock_stecker:black"..Chat..bot_id,"ok");database:set("lock_video:black"..Chat..bot_id,"ok");database:set("lock_audeo:black"..Chat..bot_id,"ok");database:set("lock_voice:black"..Chat..bot_id,"ok");database:set("lock_contact:black"..Chat..bot_id,"ok");database:set("lock_fwd:black"..Chat..bot_id,"ok");database:set("lock_link:black"..Chat..bot_id,"ok");database:set("lock_username:black"..Chat..bot_id,"ok");database:set("lock_botAndBan:black"..Chat..bot_id,"ok");database:set("lock_new:black"..Chat..bot_id,"ok")
 end
-function download_to_file(url, file_path) 
-local respbody = {} 
-local options = { url = url, sink = ltn12.sink.table(respbody), redirect = true } 
-local response = nil 
-options.redirect = false 
-response = {https.request(options)} 
-local code = response[2] 
-local headers = response[3] 
-local status = response[4] 
-if code ~= 200 then return false, code 
-end 
-file = io.open(file_path, "w+") 
-file:write(table.concat(respbody)) 
-file:close() 
-return file_path, code 
-end 
-function add_file(msg,chat,ID_FILE,File_Name)
-if File_Name:match('.json') then
-if tonumber(File_Name:match('(%d+)')) ~= tonumber(bot_id) then 
-sendtext(chat,msg.id_,"🔖┇ملف النسخه الاحتياطيه ليس لهاذا البوت")   
-return false 
-end      
-local File = json:decode(https.request('https://api.telegram.org/bot' .. token .. '/getfile?file_id='..ID_FILE) ) 
-download_to_file('https://api.telegram.org/file/bot'..token..'/'..File.result.file_path, ''..File_Name) 
-sendtext(chat,msg.id_,"♻┇جاري ...\n📥┇رفع الملف الان")   
-else
-sendtext(chat,msg.id_,"*📛┇عذرا الملف ليس بصيغة {JSON} يرجى رفع الملف الصحيح*")   
-end      
-local info_file = io.open('./'..bot_id..'.json', "r"):read('*a')
-local groups = JSON.decode(info_file)
-for idg,v in pairs(groups.GP_BOT) do
-database:sadd("thsake:gog"..bot_id,idg) 
-database:sadd( 'black:'..bot_id.."groups",idg) 
-database:set( 'black:'..bot_id.."charge:"..idg,true)
-Add_local(idg)
-if v.MNSH then
-for k,idmsh in pairs(v.MNSH) do
-database:sadd('black:'..bot_id..'creator:'..idg,idmsh)
-end;end
-if v.MDER then
-for k,idmder in pairs(v.MDER) do
-database:sadd('black:'..bot_id..'owners:'..idg,idmder)  
-end;end
-if v.MOD then
-for k,idmod in pairs(v.MOD) do
-database:sadd('black:'..bot_id..'mods:'..idg,idmod)  
-end;end
-if v.ASAS then
-for k,idASAS in pairs(v.ASAS) do
-database:sadd('black:'..bot_id..'creatorbasic:'..idg,idASAS)  
-end;end
-if v.linkgroup then
-if v.linkgroup ~= "" then
-database:set('black:'..bot_id.."group:link"..idg,v.linkgroup)   
-end;end;end
-sendtext(chat,msg.id_,"🔰┇تم رفع الملف بنجاح وتفعيل المجموعات\n📬┇ورفع {الامنشئين الاساسين ; والمنشئين ; والمدراء; والادمنيه} بنجاح")   
-end
-function black_run_(msg,data)
-local text = msg.content_.text_
 ------------------------------------------------------------------------
 if text == ("مسح ردود المطور") and is_devabas(msg) then
 local list = redis:smembers('black:'..bot_id..'sudo:kekore')
@@ -9352,11 +9284,5 @@ end
 end
 end
 end
---[[
- _____ ____  _   _    _    _  _______
-|_   _/ ___|| | | |  / \  | |/ / ____|
-  | | \___ \| |_| | / _ \ | ' /|  _|
-  | |  ___) |  _  |/ ___ \| . \| |___
-  |_| |____/|_| |_/_/   \_\_|\_\_____|
-           CH > @blackTEAM
---]]
+
+
