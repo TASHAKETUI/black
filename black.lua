@@ -923,16 +923,7 @@ if #list == 0 then
 text = "❕┇لا يوجد ردود للمطور"
 end
 send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
-end
-if text or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.animation_ or msg.content_.audio_ or msg.content_.document_ or msg.content_.photo_ or msg.content_.video_ then  
-local keko1 = redis:get('black:'..bot_id..'sudo:keko1'..msg.sender_user_id_..''..msg.chat_id_..'')
-local test = redis:get('black:'..bot_id..'sudo:msg'..msg.sender_user_id_..''..msg.chat_id_..'')
-if keko1 == 're' then
-send(msg.chat_id_, msg.id_, 1, '☑┇تم حفظ الرد', 1, 'md')
-redis:set('black:'..bot_id..'sudo:keko1'..msg.sender_user_id_..''..msg.chat_id_..'', 'no')
-if msg.content_.sticker_ then   
-redis:set('black:'..bot_id.."sudo:add:reply1:stekr"..test, msg.content_.sticker_.sticker_.persistent_id_)  
-end   
+end  
 if msg.content_.voice_ then  
 redis:set('black:'..bot_id.."sudo:add:reply1:vico"..test, msg.content_.voice_.voice_.persistent_id_)  
 redis:set('black:'..bot_id.."sudo:addreply1:voice:caption:gp"..test,(msg.content_.caption_ or ''))  
